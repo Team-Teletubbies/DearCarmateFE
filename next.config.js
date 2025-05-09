@@ -16,6 +16,7 @@ module.exports = {
         pathname: "/uploads/**",
       },
     ],
+    unoptimized: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
