@@ -1,5 +1,5 @@
-import { CustomerType } from "@shared/types";
-import { Column } from "@ui/shared/table/types";
+import { CustomerType } from '@shared/types'
+import { Column } from '@ui/shared/table/types'
 import {
   Table,
   TableBody,
@@ -7,35 +7,34 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-} from "@ui/shared/table/composition";
-import EmptyData from "@ui/shared/table/EmptyData";
-import { CUSTOMER_GENDER_MAP } from "@ui/shared/util-constants/constants";
-import CustomerOptionButtons from "../feature-customers/CustomerOptionButtons";
-import useCustomerDetailModal from "../util-customer-detail-modal/useCustomerDetailModal";
+} from '@ui/shared/table/composition'
+import EmptyData from '@ui/shared/table/EmptyData'
+import CustomerOptionButtons from '../feature-customers/CustomerOptionButtons'
+import useCustomerDetailModal from '../util-customer-detail-modal/useCustomerDetailModal'
 
 type CustomerWithLabel = CustomerType & {
   genderToLabel?: string;
   ageGroupToLabel?: string | null;
   regionToLabel?: string | null;
-};
+}
 
 type CustomersInfoTableProps = {
   data: CustomerWithLabel[];
-};
+}
 
 const columns: Column<CustomerType>[] = [
-  { key: "name", title: "고객명" },
-  { key: "contractCount", title: "계약 횟수" },
-  { key: "gender", title: "성별" },
-  { key: "phoneNumber", title: "연락처" },
-  { key: "ageGroup", title: "연령대" },
-  { key: "region", title: "지역" },
-  { key: "email", title: "이메일" },
-];
+  { key: 'name', title: '고객명' },
+  { key: 'contractCount', title: '계약 횟수' },
+  { key: 'gender', title: '성별' },
+  { key: 'phoneNumber', title: '연락처' },
+  { key: 'ageGroup', title: '연령대' },
+  { key: 'region', title: '지역' },
+  { key: 'email', title: '이메일' },
+]
 
 const CustomersInfoTable = ({ data }: CustomersInfoTableProps) => {
-  const { openCustomerDetailModal } = useCustomerDetailModal();
-  const isEmpty = data.length === 0;
+  const { openCustomerDetailModal } = useCustomerDetailModal()
+  const isEmpty = data.length === 0
 
   return (
     <TableContainer>
@@ -45,7 +44,7 @@ const CustomersInfoTable = ({ data }: CustomersInfoTableProps) => {
             {columns.map((column) => (
               <TableCell
                 key={column.key}
-                width={column.key === "email" ? "230px" : undefined}
+                width={column.key === 'email' ? '230px' : undefined}
               >
                 {column.title}
               </TableCell>
@@ -57,15 +56,15 @@ const CustomersInfoTable = ({ data }: CustomersInfoTableProps) => {
           {data.map((record) => {
             const processedRecord = {
               ...record,
-              gender: record.genderToLabel || "-",
-              ageGroup: record.ageGroupToLabel || "-",
-              region: record.regionToLabel || "-",
-            };
+              gender: record.genderToLabel || '-',
+              ageGroup: record.ageGroupToLabel || '-',
+              region: record.regionToLabel || '-',
+            }
             return (
               <TableRow
                 key={record.id}
                 onClick={() => {
-                  openCustomerDetailModal({ data: record });
+                  openCustomerDetailModal({ data: record })
                 }}
               >
                 {columns.map((column) => (
@@ -77,7 +76,7 @@ const CustomersInfoTable = ({ data }: CustomersInfoTableProps) => {
                   <CustomerOptionButtons customer={record} />
                 </TableCell>
               </TableRow>
-            );
+            )
           })}
           {isEmpty && (
             <TableRow>
@@ -89,7 +88,7 @@ const CustomersInfoTable = ({ data }: CustomersInfoTableProps) => {
         </TableBody>
       </Table>
     </TableContainer>
-  );
-};
+  )
+}
 
-export default CustomersInfoTable;
+export default CustomersInfoTable
